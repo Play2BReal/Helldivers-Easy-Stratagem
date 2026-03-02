@@ -1,0 +1,14 @@
+App(
+    appid="helldivers_stratagem",
+    name="Helldivers Stratagem",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="helldivers_stratagem_app",
+    requires=["gui", "input", "notification", "bt", "storage"],
+    stack_size=2 * 1024,
+    order=40,
+    fap_category="USB",
+    fap_author="",
+    fap_version="1.0",
+    fap_description="Send Helldivers 2 stratagem codes via USB HID or BLE HID (Ctrl+WASD). Based on NFC-Login HID pattern.",
+    fap_libs=["ble_profile"],
+)

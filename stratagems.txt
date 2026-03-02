@@ -1,0 +1,108 @@
+# Helldivers 2 stratagems - place at: SD/apps_data/helldivers_stratagem/stratagems.txt
+# The app creates apps_data/helldivers_stratagem automatically if missing.
+# Category: Name   (sets category for following stratagems until next Category line)
+# Stratagems: Name|U,D,L,R  (U=Up D=Down L=Left R=Right = Ctrl+WASD)
+# Keybinds: UP=Name  (keys: UP, DOWN, LEFT, RIGHT, OK, BACK)
+# Lines starting with # ignored. Empty lines skipped.
+
+Category: Offensive: Orbital
+Orbital Precision Strike|R,R,U
+Orbital Gatling Barrage|R,D,L,U,U
+Orbital Airburst Strike|R,R,R
+Orbital Napalm Barrage|R,R,D,L,R,U
+Orbital 120MM HE Barrage|R,R,D,L,R,D
+Orbital Walking Barrage|R,D,R,D,R,D
+Orbital 380MM HE Barrage|R,D,U,U,L,D,D
+Orbital Railcannon Strike|R,U,D,D,R
+Orbital Laser|R,D,U,R,D
+Orbital EMS Strike|R,R,L,D
+Orbital Gas Strike|R,R,D,R
+Orbital Smoke Strike|R,R,D,U
+
+Category: Offensive: Eagle
+Eagle 500kg Bomb|U,R,D,D,D
+Eagle Strafing Run|U,R,R
+Eagle 110MM Rocket Pods|U,R,U,L
+Eagle Airstrike|U,R,D,R
+Eagle Cluster Bomb|U,R,D,D,R
+Eagle Napalm Airstrike|U,R,D,U
+Eagle Smoke Strike|U,R,U,D
+
+Category: Supply: Support Weapons
+CQC-1 One True Flag|D,L,R,R,U
+MG-43 Machine Gun|D,L,D,U,R
+M-105 Stalwart|D,L,D,U,U,L
+MG-206 Heavy Machine Gun|D,L,U,D,D
+RS-422 Railgun|D,R,D,U,L,R
+APW-1 Anti-Materiel Rifle|D,L,R,U,D
+GL-21 Grenade Launcher|D,L,U,L,D
+GL-52 De-Escalator|D,R,U,L,R
+TX-41 Sterilizer|D,L,U,D,L
+FLAM-40 Flamethrower|D,L,U,D,U
+LAS-98 Laser Cannon|D,L,D,U,L
+LAS-99 Quasar Cannon|D,D,U,L,R
+ARC-3 Arc Thrower|D,R,D,U,L,L
+MLS-4X Commando|D,L,U,D,R
+EAT-17 Expendable Anti-tank|D,D,L,U,R
+AC-8 Autocannon|D,L,D,U,U,R
+RL-77 Airburst Rocket Launcher|D,U,U,L,R
+FAF-14 Spear Launcher|D,D,U,D,D
+StA-X3 W.A.S.P. Launcher|D,D,U,D,R
+GR-8 Recoilless Rifle|D,L,R,R,L
+
+Category: Supply: Backpacks
+B-1 Supply Pack|D,L,D,U,U,D
+B-100 Portable Hellbomb|D,R,U,U,U
+LIFT-860 Hover Pack|D,U,U,D,L,R
+LIFT-850 Jump Pack|D,U,U,D,U
+SH-32 Shield Generator Pack|D,U,L,R,L,R
+SH-51 Directional Shield Backpack|D,U,L,R,U,U
+SH-20 Ballistic Shield Backpack|D,L,D,D,U,L
+AX/ARC-3 "Guard Dog" K-9|D,U,L,U,R,L
+AX/AR-23 "Guard Dog"|D,U,L,U,R,D
+AX/LAS-5 "Guard Dog" Rover|D,U,L,U,R,R
+AX/TX-13 "Guard Dog" Dog Breath|D,U,L,U,R,U
+
+Category: Supply: Vehicles
+M-102 Fast Recon Vehicle|L,D,R,D,R,D,U
+EXO-49 Emancipator Exosuit|L,D,R,U,L,D,U
+EXO-45 Patriot Exosuit|L,D,R,U,L,D,D
+TD-220 Bastion (Tank)|L,D,R,D,L,D,U,D,U
+
+Category: Defensive
+A/G-16 Gatling Sentry|D,U,R,L
+A/MG-43 Machine Gun Sentry|D,U,R,R,U
+E/FLAM-40 Flame Sentry|D,U,R,D,U,U
+A/MLS-4X Rocket Sentry|D,U,R,R,L
+A/AC-8 Autocannon Sentry|D,U,R,U,L,U
+A/M-23 EMS Mortar Sentry|D,U,R,D,R
+A/M-12 Mortar Sentry|D,U,R,R,D
+FX-12 Shield Generator Relay|D,D,L,R,L,R
+E/GL-21 Grenadier Battlement|D,R,D,L,R
+E/AT-12 Anti-Tank Emplacement|D,U,L,R,R,R
+E/MG-101 HMG Emplacement|D,U,L,R,R,L
+A/ARC-3 Tesla Tower|D,U,R,U,L,R
+MD-17 Anti-Tank Mines|D,L,U,U,U
+MD-8 Gas Mines|D,L,L,R
+MD-6 Anti-Personnel Minefield|D,L,U,R
+MD-I4 Incendiary Mines|D,L,L,D
+
+Category: Mission Stratagems
+Reinforce|U,D,R,L,U
+SOS Beacon|U,D,R,U
+Resupply|D,D,U,R
+NUX-223 Hellbomb|D,U,L,D,U,R,D,U
+SSSD Delivery|D,D,D,U,U
+Seismic Probe|U,U,L,R,D,D
+Upload Data|L,R,U,U,U
+Eagle Rearm|U,U,L,U,R
+SEAF Artillery|R,U,U,D
+Super Earth Flag|D,U,D,U
+Hive Breaker Drill|L,U,D,R,D,D,D
+
+UP=Reinforce
+DOWN=Resupply
+LEFT=SOS Beacon
+RIGHT=Orbital Airburst Strike
+OK=Orbital Precision Strike
+BACK=A/G-16 Gatling Sentry
