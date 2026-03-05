@@ -13,8 +13,8 @@
 #include "stratagem_data.h"
 #include "hid/hd2_hid.h"
 
-#define KEY_PRESS_MS   80
-#define BETWEEN_KEY_MS 100
+#define KEY_PRESS_MS   30
+#define BETWEEN_KEY_MS 20
 #define MAX_LIST_ITEMS 128
 #define MAX_CATEGORIES 16
 
@@ -155,7 +155,6 @@ static void keybind_config_draw_callback(Canvas* canvas, void* _model) {
     canvas_draw_str(canvas, 2, 8, "Up/Down=move  OK=change");
     int selected = app->keybind_config_selected;
     int first = (selected >= KEYBIND_VISIBLE_ROWS) ? (selected - KEYBIND_VISIBLE_ROWS + 1) : 0;
-    if(first < 0) first = 0;
     for(int vi = 0; vi < KEYBIND_VISIBLE_ROWS && first + vi < KEYBIND_KEY_COUNT; vi++) {
         int i = first + vi;
         int y = KEYBIND_TOP + vi * KEYBIND_ROW_H;
@@ -225,6 +224,7 @@ static void keybind_picker_enter_callback(void* ctx, uint32_t index) {
     } else {
         stratagem_keybind[k] = (int8_t)index;
     }
+    stratagem_save_keybinds(NULL);
     view_dispatcher_switch_to_view(app->view_dispatcher, ViewKeybindConfig);
 }
 

@@ -39,7 +39,7 @@ static inline uint16_t strat_dir_to_key(StratagemDir d) {
 }
 
 #define STRATAGEM_MAX_COUNT  96
-#define STRATAGEM_MAX_SEQ    8
+#define STRATAGEM_MAX_SEQ    10
 #define STRATAGEM_NAME_SIZE  32
 #define STRATAGEM_CATEGORY_SIZE 20
 #define KEYBIND_KEY_COUNT    6
@@ -54,20 +54,10 @@ typedef struct {
 extern const StratagemDef* stratagem_list;
 extern uint8_t stratagem_count;
 
-/** Keybind: stratagem index per key (Up, Down, Right, Left, Ok, Back). -1 = unbound. */
 extern int8_t stratagem_keybind[KEYBIND_KEY_COUNT];
-
-/** Load stratagems and keybinds from file. Format:
- *   Name|U,D,L,R   (stratagem)
- *   UP=StratagemName   (keybind: UP, DOWN, LEFT, RIGHT, OK, BACK)
- * Lines starting with # ignored. If path NULL or missing, uses built-in list and no keybinds.
- */
 void stratagem_load_from_file(const char* path);
-
-/** Find stratagem index by name (case-sensitive). Returns -1 if not found. */
+void stratagem_save_keybinds(const char* path);
 int stratagem_index_by_name(const char* name);
-
-/** Key names for keybind config (index 0..5 = Up, Down, Right, Left, Ok, Back). */
 extern const char* stratagem_key_names[KEYBIND_KEY_COUNT];
 
 #ifdef __cplusplus

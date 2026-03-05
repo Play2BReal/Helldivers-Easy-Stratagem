@@ -1,11 +1,11 @@
 #include "stratagem_data.h"
 #include <string.h>
+#include <stdio.h>
 #include <storage/storage.h>
 #include <toolbox/stream/stream.h>
 #include <toolbox/stream/file_stream.h>
 #include <furi.h>
 
-/* No built-in stratagems: list is loaded from stratagems.txt only. */
 static const StratagemDef builtin_list[] = { { NULL, NULL, NULL, 0 } };
 static const uint8_t builtin_count = 0;
 
@@ -70,6 +70,14 @@ static bool parse_seq(const char* s, StratagemDir* out, uint8_t max_len, uint8_t
 
 #define STRATAGEM_FILE_PATH EXT_PATH("apps_data/helldivers_stratagem/stratagems.txt")
 #define LINE_BUF_SIZE 256
+
+static const char* const keybind_file_keys[] = {"UP", "DOWN", "RIGHT", "LEFT", "OK", "BACK"};
+
+static bool is_keybind_line(const char* s) {
+    return strncmp(s, "UP=", 3) == 0 || strncmp(s, "DOWN=", 5) == 0 ||
+           strncmp(s, "RIGHT=", 6) == 0 || strncmp(s, "LEFT=", 5) == 0 ||
+           strncmp(s, "OK=", 3) == 0 || strncmp(s, "BACK=", 5) == 0;
+}
 
 void stratagem_load_from_file(const char* path) {
     stratagem_list = builtin_list;
@@ -174,5 +182,58 @@ void stratagem_load_from_file(const char* path) {
     file_stream_close(stream);
     stream_free(stream);
     furi_string_free(line);
+    furi_record_close(RECORD_STORAGE);
+}
+
+void stratagem_save_keybinds(const char* path) {
+    if(!path) path = STRATAGEM_FILE_PATH;
+    if(stratagem_count == 0) return;
+
+    Storage* storage = furi_record_open(RECORD_STORAGE);
+    Stream* rstream = file_stream_alloc(storage);
+    if(!rstream || !file_stream_open(rstream, path, FSAM_READ, FSOM_OPEN_EXISTING)) {
+        if(rstream) { file_stream_close(rstream); stream_free(rstream); }
+        furi_record_close(RECORD_STORAGE);
+        return;
+    }
+
+    FuriString* line = furi_string_alloc();
+    FuriString* prefix = furi_string_alloc();
+    char buf[LINE_BUF_SIZE];
+
+    while(stream_read_line(rstream, line)) {
+        furi_string_trim(line);
+        size_t n = furi_string_size(line);
+        if(n >= LINE_BUF_SIZE) continue;
+        memcpy(buf, furi_string_get_cstr(line), n + 1);
+        buf[n] = '\0';
+        if(is_keybind_line(buf)) break;
+        furi_string_cat_printf(prefix, "%s\n", buf);
+    }
+    file_stream_close(rstream);
+    stream_free(rstream);
+    furi_string_free(line);
+
+    Stream* wstream = file_stream_alloc(storage);
+    if(!wstream || !file_stream_open(wstream, path, FSAM_WRITE, FSOM_CREATE_ALWAYS)) {
+        if(wstream) { file_stream_close(wstream); stream_free(wstream); }
+        furi_string_free(prefix);
+        furi_record_close(RECORD_STORAGE);
+        return;
+    }
+    stream_write_cstring(wstream, furi_string_get_cstr(prefix));
+    furi_string_free(prefix);
+
+    for(int i = 0; i < KEYBIND_KEY_COUNT; i++) {
+        if(stratagem_keybind[i] < 0) continue;
+        uint8_t idx = (uint8_t)stratagem_keybind[i];
+        if(idx >= stratagem_count) continue;
+        char keyline[LINE_BUF_SIZE];
+        int len = snprintf(keyline, sizeof(keyline), "%s=%s\n", keybind_file_keys[i], stratagem_list[idx].name);
+        if(len > 0 && (size_t)len < sizeof(keyline))
+            stream_write(wstream, (const uint8_t*)keyline, (size_t)len);
+    }
+    file_stream_close(wstream);
+    stream_free(wstream);
     furi_record_close(RECORD_STORAGE);
 }
